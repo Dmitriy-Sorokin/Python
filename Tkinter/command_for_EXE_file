@@ -1,0 +1,13 @@
+https://pypi.org/project/pyinstaller/
+
+#Сборка приложения с настройками по умолчанию
+pyinstaller notepad.py
+
+#Сборка приложения одним файлом
+pyinstaller -F notepad.py
+
+#Сборка приложения без консоли
+pyinstaller -w notepad.py
+
+#Сборка приложения со своей иконкой
+pyinstaller -i "d:\учёба\New project PYTHON\Compilation\notepad\iconpy.ico" notepad.py
