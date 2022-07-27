@@ -10,4 +10,4 @@ pyinstaller -F notepad.py
 pyinstaller -w notepad.py
 
 #Сборка приложения со своей иконкой
-pyinstaller -i "d:\учёба\New project PYTHON\Compilation\notepad\iconpy.ico" notepad.py
+pyinstaller -F -w -i "c:\local git reposiroty\Python\sorter_files\sort.ico" sorter.py
