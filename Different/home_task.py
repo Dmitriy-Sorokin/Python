@@ -1,4 +1,4 @@
-s = "Helloworld"
+s = "Hello world"
 if " " in s:
     print(s.upper())
 else:
