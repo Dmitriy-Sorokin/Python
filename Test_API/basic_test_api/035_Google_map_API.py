@@ -2,6 +2,7 @@ import requests
 import json
 import pprint
 
+
 class New_location():
     '''Working with new location'''
 
@@ -66,6 +67,82 @@ class New_location():
         else:
             print("FALSE")
 
+        '''change new location'''
+        put_resource = "/maps/api/place/update/json"
+        put_url = base_url + put_resource + key
+        json_for_update_new_location = {"place_id": place_id,
+                                        "address": "100 Lenina street, RU",
+                                        "key": "qaclick123"
+                                        }
+        result_put = requests.put(put_url, json=json_for_update_new_location)
+        pprint.pprint(result_put.text)
+        print('status code: ' + str(result_put.status_code))
+        assert 200 == result_put.status_code
+        if result_put.status_code == 200:
+            print("TRUE")
+        else:
+            print("FALSE")
+
+        check_put = result_put.json()
+        check_put_info = check_put.get('msg')
+        print('Mesage :' + check_put_info)
+        assert check_put_info == "Address successfully updated"
+        print("TRUE")
+
+        '''check change new location'''
+
+        result_get = requests.get(get_url)
+        pprint.pprint(result_get.text)
+
+        print('status code: ' + str(result_get.status_code))
+        assert 200 == result_get.status_code
+        if result_get.status_code == 200:
+            print("TRUE")
+        else:
+            print("FALSE")
+        check_address = result_get.json()
+        check_address_info = check_address.get("address")
+        print('Mesage :' + check_address_info)
+        assert check_address_info == "100 Lenina street, RU"
+        print("TRUE")
+
+        '''Delete new location'''
+
+        delete_resource = "/maps/api/place/delete/json"
+        delete_url = base_url + delete_resource + key
+        json_for_delete_new_location = {
+            "place_id": place_id
+        }
+        result_delete = requests.delete(delete_url, json=json_for_delete_new_location)
+        print(result_delete.text)
+        print('status code: ' + str(result_delete.status_code))
+        assert 200 == result_delete.status_code
+        if result_delete.status_code == 200:
+            print("TRUE")
+        else:
+            print("FALSE")
+        check_status = result_delete.json()
+        check_status_info = check_status.get("status")
+        print('Mesage :' + check_status_info)
+        assert check_status_info == "OK"
+        print("TRUE")
+
+        '''check delete new location'''
+
+        result_get = requests.get(get_url)
+        pprint.pprint(result_get.text)
+
+        print('status code: ' + str(result_get.status_code))
+        assert 404 == result_get.status_code
+        if result_get.status_code == 404:
+            print("TRUE")
+        else:
+            print("FALSE")
+        check_address = result_get.json()
+        check_address_info = check_address.get("msg")
+        print('Mesage :' + check_address_info)
+        assert check_address_info == "Get operation failed, looks like place_id  doesn\'t exists"
+        print("TRUE")
 
 new_place = New_location()
 
