@@ -144,6 +144,8 @@ class New_location():
         assert check_address_info == "Get operation failed, looks like place_id  doesn\'t exists"
         print("TRUE")
 
+        print('Tested Test_new_location completed')
+
 new_place = New_location()
 
 new_place.create_new_location()
